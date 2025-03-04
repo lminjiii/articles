@@ -32,7 +32,7 @@ public class ArticleController {
 
     @GetMapping({"", "/"})
     public String showAllArticles(Model model) {
-        List<ArticleDTO> articles = articleService.getAllArticle();
+        List<ArticleDTO> articles = articleService.getAllArticles();
         model.addAttribute("articles", articles);
         return "/articles/show_all";
     }

@@ -15,7 +15,7 @@ import java.util.List;
 public class ArticleService {
     private final ArticleDAO dao;
 
-    public List<ArticleDTO> getAllArticle() {
+    public List<ArticleDTO> getAllArticles() {
         List<Article> articleList = dao.getAllArticles();
 
         if (ObjectUtils.isEmpty(articleList)) {
