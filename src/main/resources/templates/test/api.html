@@ -17,14 +17,15 @@ password : <input type="text" id="password"><br>
      $("#btnApi").on("click", function () {
          event.preventDefault();
 
-         if ($("#userid").val == "") {
+         if ($("#userid").val() == "") {
              $("#userid").focus();
              return;
          }
-         if ($("#password").val == "") {
+         if ($("#password").val() == "") {
              $("#password").focus();
              return;
          }
+
          // 아이디와 패스워드 입력 후 전송하면 서버에 출력
          $.ajax({
              url: "apiPostTest",
@@ -45,15 +46,63 @@ password : <input type="text" id="password"><br>
              }
          });
      });
+
      $("#btnResponse").on("click", function () {
-         alert("btnResponse");
+         $.ajax({
+             url: "getResponse",
+             type: "post",
+             datatype: "json",
+             data: "",
+             success: function (data, status, xhr) {
+                 console.log(data);
+             },
+             error: function (xhr, status, error) {
+                 console.log(error);
+             }
+         });
      });
 
      $("#btnArray").on("click", function () {
-         alert("btnArray");
-     });
+    let jang = {
+        'userid': $("#userid").val(),
+        'password': $("#password").val(),
+    };
+
+    let jin = {
+        'userid': '안유진',
+        'password': '1234',
+    };
+
+    $.ajax({
+        url: "apiPostArrayTest",
+        type: "post",
+        datatype: "json",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        data: JSON.stringify([jang, jin]),
+        success: function (data, status, xhr) {
+            console.log(data);
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+           }
+       });
+    });
+
      $("#btnDelete").on("click", function () {
-         alert("btnDelete");
+         $.ajax({
+             url: "apiTest",
+             type: "put",
+             datatype: "json",
+             data: "",
+             success: function (data, status, xhr) {
+                 console.log(data);
+             },
+             error: function (xhr, status, error) {
+                 console.log(error);
+             }
+         });
      });
  });
 </script>
