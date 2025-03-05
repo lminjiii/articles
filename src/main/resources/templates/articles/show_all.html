@@ -10,7 +10,7 @@
 </head>
 <body>
 <div layout:fragment="content" class="content">
-<!--    삭제 처리 후 메세지 보이기-->
+    <!--    삭제 처리 후 메세지 보이기-->
     <div th:unless="${msg==null}">
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>[[ ${msg} ]]</strong>
@@ -37,6 +37,35 @@
         </div>
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+
+            <li class="page-item"
+                th:classappend="${articles.number} <= 0? 'disabled'">
+                <a class="page-link"
+                   th:href="@{|/articles?page=${articles.number - 1}|}">
+                    Previous
+                </a>
+            </li>
+
+            <th:block th:each="pageNumber : ${pageBars}">
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{|/articles?page=${pageNumber}|}">
+                        [[ ${pageNumber + 1} ]]
+                    </a>
+                </li>
+            </th:block>
+
+            <li class="page-item"
+                th:classappend="${articles.number + 1} == ${articles.totalPages}? 'disabled'">
+                <a class="page-link"
+                   th:href="@{|/articles?page=${articles.number + 1}|}">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
     <a href="/articles/new">New Article</a>
 </div>
 </body>
